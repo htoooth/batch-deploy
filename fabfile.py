@@ -45,3 +45,9 @@ def deploy():
 def branch():
   with cd(src_dir):
     run('git branch')
+
+@task
+# @parallel
+def log():
+  with cd(src_dir):
+    run('pm2 logs yohobuy-node')
