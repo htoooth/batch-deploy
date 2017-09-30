@@ -15,7 +15,11 @@ env.hosts = [
 pc_dir = '/home/test/yohobuy-node'
 h5_dir = '/home/test/yohobuywap-node'
 
+pc_app = 'yohobuy-node'
+h5_app = 'yohobuywap-node'
+
 src_dir = h5_dir if env.has_key('p') else pc_dir
+app = h5_app if env.has_key('p') else pc_app
 
 @task
 @parallel
@@ -41,13 +45,37 @@ def deploy():
     run('npm run prod')
 
 @task
-# @parallel
+@parallel
 def branch():
   with cd(src_dir):
     run('git branch')
 
 @task
 @parallel
+def fetch():
+  with cd(src_dir):
+    run('git fetch -p')
+
+@task
+@parallel
+def checkout():
+  with cd(src_dir):
+    run('git checkout feature/qps')
+
+@task
+@parallel
+def start():
+  with cd(src_dir):
+    run('pm2 start process.json')
+
+@task
+# @parallel
+def list():
+  with cd(src_dir):
+    run('pm2 list')
+
+@task
+@parallel
 def log():
   with cd(src_dir):
-    run('pm2 logs yohobuy-node')
+    run('pm2 logs %s' % (app))
