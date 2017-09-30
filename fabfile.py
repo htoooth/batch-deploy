@@ -18,25 +18,30 @@ h5_dir = '/home/test/yohobuywap-node'
 src_dir = pc_dir
 
 @task
+# @parallel
 def name():
   run('hostname')
 
 @task
+# @parallel
 def pull():
   with cd(src_dir):
     run('git pull')
 
 @task
+# @parallel
 def install():
   with cd(src_dir):
     run('npm i')
 
 @task
+# @parallel
 def deploy():
   with cd(src_dir):
     run('npm run prod')
 
 @task
+# @parallel
 def branch():
   with cd(src_dir):
     run('git branch')
