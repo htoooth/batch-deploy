@@ -42,7 +42,8 @@ def install():
 @parallel
 def deploy():
   with cd(src_dir):
-    run('npm run prod')
+    run('git pull')
+    run('pm2 restart %s' % (app))
 
 @task
 @parallel
@@ -67,6 +68,12 @@ def checkout():
 def start():
   with cd(src_dir):
     run('pm2 start process.json')
+
+@task
+@parallel
+def restart():
+  with cd(src_dir):
+    run('pm2 restart %s' % (app))
 
 @task
 @parallel
