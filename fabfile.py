@@ -69,7 +69,7 @@ def start():
     run('pm2 start process.json')
 
 @task
-# @parallel
+@parallel
 def list():
   with cd(src_dir):
     run('pm2 list')
