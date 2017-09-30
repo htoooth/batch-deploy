@@ -86,3 +86,8 @@ def list():
 def log():
   with cd(src_dir):
     run('pm2 logs %s' % (app))
+
+@task
+@parallel
+def env():
+  run('cat /etc/profile | grep TEST')
