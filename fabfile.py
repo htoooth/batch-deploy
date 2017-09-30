@@ -15,7 +15,7 @@ env.hosts = [
 pc_dir = '/home/test/yohobuy-node'
 h5_dir = '/home/test/yohobuywap-node'
 
-src_dir = pc_dir
+src_dir = (env.p or pc_dir) and h5_dir
 
 @task
 @parallel
